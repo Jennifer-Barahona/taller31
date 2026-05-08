@@ -20,11 +20,13 @@
     <h2>Taller Corte 3_1</h2>
 
     <div class="controles">
-        <strong>Ventana de recorte:</strong><br>
-        x1 <input type="number" id="x1_in" value="100"> y1 <input type="number" id="y1_in" value="100"><br>
-        x2 <input type="number" id="x2_in" value="400"> y2 <input type="number" id="y2_in" value="300"><br>
-        <button onclick="actualizarVentana()" style="width: 100%; margin-top: 10px;">Actualizar</button>
-    </div>
+    <strong>Ventana de recorte:</strong><br>
+    x1 <input type="number" id="x1_in" value="100" min="0" max="550"> 
+    y1 <input type="number" id="y1_in" value="100" min="0" max="450"><br>
+    x2 <input type="number" id="x2_in" value="400" min="0" max="550"> 
+    y2 <input type="number" id="y2_in" value="300" min="0" max="450"><br>
+    <button onclick="actualizarVentana()" style="width: 100%; margin-top: 10px;">Actualizar</button>
+</div>
 
     <canvas id="canvasProyecto" width="550" height="450"></canvas>
 
