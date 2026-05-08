@@ -123,12 +123,12 @@ function cohenSutherland(x1, y1, x2, y2) {
 
 function cambiarLinea(direccion) {
     caso = Math.max(0, Math.min(4, caso + direccion));
-    renderizar();
+    dibujarTodo();
 }
 
 function irLinea(index) {
     caso = index;
-    renderizar();
+    dibujarTodo();
 }
 
 function actualizarVentana() {
@@ -136,6 +136,41 @@ function actualizarVentana() {
     ymin = parseInt(document.getElementById('y1_in').value);
     xmax = parseInt(document.getElementById('x2_in').value);
     ymax = parseInt(document.getElementById('y2_in').value);
-    renderizar();
+    dibujarTodo();
 }
+
+
+function dibujarTodo() {
+    //Borramos todo lo que hay en el cuadro para dibujar otra vez
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    //Dibujamos la ventana
+    dibujarVentana(); 
+    
+    //Elegimos la línea que toca mostrar
+    let lineaActual = lineas[caso];
+    
+    //Dibujamos la línea completa 
+    dibujarLinea(lineaActual.x1, lineaActual.y1, lineaActual.x2, lineaActual.y2, "#eeeeee", 1);
+    
+    //Llamamos al algoritmo cohenSutherland 
+    let resultado = cohenSutherland(lineaActual.x1, lineaActual.y1, lineaActual.x2, lineaActual.y2);
+    
+    //Buscamos el panel
+    let panel = document.getElementById('infoPanel');
+    let mensaje = "<b>" + lineaActual.nombre + "</b><br>";
+    
+    //Si la línea se o no avisamos si llega a estar fuera.
+    if (resultado != null) {
+        mensaje = mensaje + "Punto 1: (" + resultado.px1 + ", " + resultado.py1 + ")<br>";
+        mensaje = mensaje + "Punto 2: (" + resultado.px2 + ", " + resultado.py2 + ")";
+    } else {
+        mensaje = mensaje + "Resultado: La línea está fuera de los límites.";
+    }
+    
+    //mensaje adicional
+    panel.innerHTML = mensaje;
+}
+
+actualizarVentana();
 
