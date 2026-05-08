@@ -28,3 +28,29 @@ function trazarLinea(x1, y1, x2, y2, color, grosor) {
     ctx.stroke();
 }
 
+
+const INSIDE = 0; // 0000
+const LEFT = 1; // 0001
+const RIGHT = 2; // 0010
+const BOTTOM = 4; // 0100
+const TOP = 8; // 1000
+
+function obtenerCodigo(x, y) {
+    let codigo = 0; 
+    if (x < xmin) {
+        codigo = codigo + LEFT;   // Si es izquierda, suma 1
+    } else if (x > xmax) {
+        codigo = codigo + RIGHT;  // Si es derecha, suma 2
+    }
+
+    if (y < ymin) {
+        codigo = codigo + BOTTOM; // Si es abajo, suma 4
+    } else if (y > ymax) {
+        codigo = codigo + TOP;    // Si es arriba, suma 8
+    }
+
+    return codigo;
+}
+
+
+
