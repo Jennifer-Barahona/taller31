@@ -120,3 +120,22 @@ function cohenSutherland(x1, y1, x2, y2) {
     }
 }
 
+
+function cambiarLinea(direccion) {
+    caso = Math.max(0, Math.min(4, caso + direccion));
+    renderizar();
+}
+
+function irLinea(index) {
+    caso = index;
+    renderizar();
+}
+
+function actualizarVentana() {
+    xmin = parseInt(document.getElementById('x1_in').value);
+    ymin = parseInt(document.getElementById('y1_in').value);
+    xmax = parseInt(document.getElementById('x2_in').value);
+    ymax = parseInt(document.getElementById('y2_in').value);
+    renderizar();
+}
+
