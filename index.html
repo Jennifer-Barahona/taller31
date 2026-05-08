@@ -4,8 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Taller Corte 3_1</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; flex-direction: column; align-items: center; background-color: #f4f4f9; color: #333; }
+        .controles { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-top: 20px; border: 1px solid #ddd; }
+        canvas { border: 1px solid #4a90e2; background: white; margin: 20px 0; box-shadow: 0 0 10px rgba(0,0,0,0.05); }
+        input { width: 60px; padding: 5px; margin: 5px; border: 1px solid #ccc; border-radius: 4px; }
+        button { padding: 8px 15px; cursor: pointer; background-color: #888; color: white; border: none; border-radius: 4px; transition: 0.3s; }
+        button:hover { background-color: #666; }
+        .nav-btn { font-weight: bold; background-color: #555; margin: 0 2px; }
+        .info-panel { text-align: left; background: #eee; padding: 10px; border-radius: 5px; min-width: 250px; font-family: monospace; }
+        h2 { color: #2c3e50; }
+    </style>
 </head>
 <body>
-    
+    <h2>Taller Corte 3_1</h2>
+
+    <div class="controles">
+        <strong>Ventana de recorte:</strong><br>
+        x1 <input type="number" id="x1_in" value="100"> y1 <input type="number" id="y1_in" value="100"><br>
+        x2 <input type="number" id="x2_in" value="400"> y2 <input type="number" id="y2_in" value="300"><br>
+        <button onclick="actualizarVentana()" style="width: 100%; margin-top: 10px;">Actualizar</button>
+    </div>
+
+    <canvas id="canvasProyecto" width="550" height="450"></canvas>
+
+    <div class="navegacion">
+        <button class="nav-btn" onclick="irEscena(0)">|&lt;</button>
+        <button class="nav-btn" onclick="cambiarEscena(-1)">&lt;</button>
+        <button class="nav-btn" onclick="cambiarEscena(1)">&gt;</button>
+        <button class="nav-btn" onclick="irEscena(4)">&gt;|</button>
+    </div>
+
+    <div id="infoPanel" class="info-panel" style="margin-top: 15px;">
+        </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
