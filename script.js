@@ -12,3 +12,19 @@ const lineas = [
     { x1: 40, y1: 200, x2: 510, y2: 200, desc: "Caso 5: Cruce horizontal" }
 ];
 
+//tratazar la ventana
+function dibujarViewport() {
+    ctx.strokeStyle = "blue";
+    ctx.lineWidth = 2;
+    ctx.strokeRect(xmin, ymin, xmax - xmin, ymax - ymin);
+}
+//trazar la linea
+function trazarLinea(x1, y1, x2, y2, color, grosor) {
+    ctx.beginPath();
+    ctx.strokeStyle = color;
+    ctx.lineWidth = grosor;
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.stroke();
+}
+
