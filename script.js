@@ -52,5 +52,71 @@ function obtenerCodigo(x, y) {
     return codigo;
 }
 
+function cohenSutherland(x1, y1, x2, y2) {
+    let c1 = obtenerCodigo(x1, y1);
+    let c2 = obtenerCodigo(x2, y2);
+    let aceptar = false;
+    
+    // Guardamos para devolverlos al final
+    let p1_recortado = {x: x1, y: y1};
+    let p2_recortado = {x: x2, y: y2};
 
+
+    while (true) {
+        //Si ambos códigos son 0 la línea está dentro
+        if (c1 == 0 && c2 == 0) {
+            aceptar = true; 
+            break; 
+        } 
+        //Si comparten un bit (están del mismo lado fuera)
+        else if ((c1 & c2) != 0) { 
+            break; 
+        } 
+        //Hay que cortar un pedazo de la línea
+        else {
+            let x, y;
+            //Miramos cual punto esta afuera para recortar
+            let puntoFuera;
+            if (c1 != 0) {
+                puntoFuera = c1;
+            } else {
+                puntoFuera = c2;
+            }
+
+            // Calculamos para saber donde choca la linea con el borde 
+            if (puntoFuera >= 8) { //Arriba(TOP)
+                x = x1 + (x2 - x1) * (ymax - y1) / (y2 - y1);
+                y = ymax;
+            } else if (puntoFuera >= 4) { //Abajo(BOTTOM)
+                x = x1 + (x2 - x1) * (ymin - y1) / (y2 - y1);
+                y = ymin;
+            } else if (puntoFuera >= 2) { //Derech(RIGHT)
+                y = y1 + (y2 - y1) * (xmax - x1) / (x2 - x1);
+                x = xmax;
+            } else { //Izquierda(LEFT)
+                y = y1 + (y2 - y1) * (xmin - x1) / (x2 - x1);
+                x = xmin;
+            }
+
+            //Cambiamos el punto viejo por el nuevo punto recortado
+            if (puntoFuera == c1) {
+                x1 = x; y1 = y;
+                p1_recortado.x = x; p1_recortado.y = y;
+                c1 = obtenerCodigo(x1, y1);
+            } else {
+                x2 = x; y2 = y;
+                p2_recortado.x = x; p2_recortado.y = y;
+                c2 = obtenerCodigo(x2, y2);
+            }
+        }
+    }
+
+    // Si al final se decide que la linea de puede ver entonces la dibujamos
+    if (aceptar) {
+        trazarLinea(x1, y1, x2, y2, "red", 3);
+        return {p1: p1_recortado, p2: p2_recortado};
+    } else {
+        return null;
+    }
+}
 
